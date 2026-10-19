@@ -1,27 +1,24 @@
-CREATE TABLE Vehicles
-(
-	ID INT PRIMARY KEY,
-	Name TEXT NOT NULL,
-	Plate TEXT,
-	Type TEXT,
-	odometer_km INTEGER DEFAULT 0
-	);
-	
-CREATE TABLE Expenses
-(
-		ID INT PRIMARY KEY,
-		Vehicle_ID INT REFERENCES Vehicles(ID),
-		Date TEXT NOT NULL,           
-		Category TEXT NOT NULL,       
-		Amount INT NOT NULL,
-		Note TEXT
-		);
-	
-CREATE TABLE Incomes 
-(
-    ID INTEGER PRIMARY KEY,
-    Vehicle_id INTEGER NOT NULL REFERENCES vehicles(id),
-    Date TEXT NOT NULL,
-    Amount INT NOT NULL,
-    Note TEXT
+CREATE TABLE IF NOT EXISTS vehicles (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    plate TEXT,
+    type TEXT,
+    odometer_km INTEGER DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS expenses (
+    id INTEGER PRIMARY KEY,
+    vehicle_id INTEGER NOT NULL REFERENCES vehicles(id),
+    date TEXT NOT NULL,
+    category TEXT NOT NULL,
+    amount INTEGER NOT NULL,
+    note TEXT
+);
+
+CREATE TABLE IF NOT EXISTS incomes (
+    id INTEGER PRIMARY KEY,
+    vehicle_id INTEGER NOT NULL REFERENCES vehicles(id),
+    date TEXT NOT NULL,
+    amount INTEGER NOT NULL,
+    note TEXT
 );
