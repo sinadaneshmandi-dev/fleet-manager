@@ -6,7 +6,7 @@ DB_PATH = BASE / "fleet.db"
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)
-    schema = (BASE/"schema.sql").read_text(encoding="utf-8")
+    schema = (BASE/"sql"/"schema.sql").read_text(encoding="utf-8")
     conn.executescript(schema)
     conn.commit()
     conn.close()

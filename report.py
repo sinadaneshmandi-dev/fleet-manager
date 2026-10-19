@@ -6,7 +6,7 @@ DB_PATH = BASE / "fleet.db"
 
 def get_report():
     conn = sqlite3.connect(DB_PATH)
-    query = (BASE/"report.sql").read_text(encoding="utf-8")
+    query = (BASE/"sql"/"report.sql").read_text(encoding="utf-8")
     rows = conn.execute(query).fetchall()
     conn.close()
     return rows
