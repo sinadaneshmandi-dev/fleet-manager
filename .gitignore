@@ -1,0 +1,13 @@
+# Database files (may contain real customer data)
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Editor
+.vscode/
