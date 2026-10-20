@@ -40,12 +40,17 @@ def ask_expense():
 
 def save_expense(expense):
     conn = sqlite3.connect(DB_PATH)
-    conn.execute("PRAGMA foreign_keys = ON")
-    # TODO 1: یه INSERT بنویس
-    conn.execute("INSERT INTO expenses(vehicle_id, date, category, amount,note) VALUES(? , ? , ? , ? , ?)", expense)
-    conn.commit()
-    # TODO 2: تغییرات رو ذخیره کن
-    conn.close()
+    try:
+        conn.execute("PRAGMA foreign_keys = ON")
+        conn.execute("INSERT INTO expenses(vehicle_id, date, category, amount,note) VALUES(? , ? , ? , ? , ?)", expense)
+        conn.commit()
+        print("information saved successfully")
+    except  sqlite3.IntegrityError:
+        print("information didn't save cause to an input error, plz insert true inputs.")
+    finally:
+       conn.close()
+            
+    
 
 if __name__ == "__main__":
     rows = list_vehicles()
