@@ -24,6 +24,7 @@ it reports the profit of your fleet and it will add expenses to your data base.
     ├── add_expense.py
     ├── add_income.py
     ├── add_vehicle.py
+    ├── db.py
     └── sql/
         ├── schema.sql
         ├── seed.sql
