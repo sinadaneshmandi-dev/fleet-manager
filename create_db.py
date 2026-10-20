@@ -10,6 +10,10 @@ def init_db():
     conn.executescript(schema)
     conn.commit()
     conn.close()
-if __name__ == "__main__":
+
+def run():
     init_db()
     print("Database created:",DB_PATH)
+    
+if __name__ == "__main__":
+    run()

@@ -40,11 +40,12 @@ def save_expense(expense):
     finally:
        conn.close()
             
-    
-
-if __name__ == "__main__":
-    rows = db.list_vehicles()
-    db.print_vehical(rows)
+def run():
+    row = db.list_vehicles()
+    db.print_vehical(row)
     expense = ask_expense()
     save_expense(expense)
     print(expense)
+
+if __name__ == "__main__":
+    run()

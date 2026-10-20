@@ -37,11 +37,12 @@ def save_income(income):
     finally:
        conn.close()
             
-    
-
-if __name__ == "__main__":
-    rows = db.list_vehicles()
-    db.print_vehical(rows)
+def run():
+    row = db.list_vehicles()
+    db.print_vehical(row)
     income = ask_income()
     save_income(income)
     print(income)
+
+if __name__ == "__main__":
+    run()

@@ -23,16 +23,18 @@ def save_vehicles(vehicle):
     conn = sqlite3.connect(DB_PATH)
     try:
             conn.execute("PRAGMA foreign_keys = ON")
-            conn.execute("INSERT INTO vehicles(id,name,plate,type,odometer_km) VALUES(?,?,?,?)", vehicle)
+            conn.execute("INSERT INTO vehicles(name,plate,type,odometer_km) VALUES(?,?,?,?)", vehicle)
             conn.commit()
             print("information saved successfully")
     except sqlite3.IntegrityError:
         print("information didn't save cause to an input error, plz insert true inputs.")
     finally:
            conn.close()
-    
-
-if __name__ == "__main__":
+def run():
     vehicle = ask_vehicle()
     save_vehicles(vehicle)
     print(vehicle)
+
+if __name__ == "__main__":
+    run()
+    

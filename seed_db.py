@@ -11,6 +11,9 @@ def seed_db():
     conn.commit()
     conn.close()
 
-if __name__ == "__main__":
+def run():
     seed_db()
     print("Seed data inserted.")
+
+if __name__ == "__main__":
+    run()
