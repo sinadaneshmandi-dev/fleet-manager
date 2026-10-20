@@ -1,7 +1,3 @@
-DELETE FROM incomes;
-DELETE FROM expenses;
-DELETE FROM vehicles;
-
 INSERT INTO vehicles (name, plate, type, odometer_km) VALUES
     ('اتوبوس ۱', '11A111', 'اتوبوس', 250000),
     ('کامیون ۱', '22B222', 'کامیون', 400000),

@@ -23,7 +23,7 @@ def show_menu():
 def main():
     while True:
         show_menu()
-        choice = input("Choose (1-5): ").strip()
+        choice = input("Choose (1-8): ").strip()
 
         if choice == "1":
             create_db.run()

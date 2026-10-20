@@ -3,7 +3,9 @@ Fleet management system for tracking vehicle expenses, income, and maintenance. 
 # Features: 
 it reports the profit of your fleet and it will add expenses to your data base.
 # How to run:
-    run(python main.py)
+1. Install Python 3.
+2. In the project folder, run: `python main.py`
+3. The first time, choose "Create database" from the menu.
 # Project Directory
     fleet-manager/
     ├── README.md
