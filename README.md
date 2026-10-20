@@ -5,7 +5,6 @@ it reports the profit of your fleet and it will add expenses to your data base.
 # How to run:
     1. run (python create_db.py)
     2. run (python seed_db.py)
-    if you want to add expenses 
 # if you want to add expense:
     3. run (python add_expense.py)
 # if you want to add income:
