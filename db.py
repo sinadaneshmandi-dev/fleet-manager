@@ -4,8 +4,47 @@ from pathlib import Path
 BASE = Path(__file__).parent
 DB_PATH = BASE/"fleet.db"
 
-def list_vehicles():
+def connect():
     conn = sqlite3.connect(DB_PATH)
+    conn.execute("PRAGMA foreign_keys = ON")
+    return conn
+
+def crear_db():
+    conn = connect()
+    try:
+        conn.executescript(
+             """CREATE TABLE IF NOT EXISTS vehicles (
+             id INTEGER PRIMARY KEY,
+             name TEXT NOT NULL,
+             plate TEXT,
+             type TEXT,
+             odometer_km INTEGER DEFAULT 0
+         );
+         
+         CREATE TABLE IF NOT EXISTS expenses (
+             id INTEGER PRIMARY KEY,
+             vehicle_id INTEGER NOT NULL REFERENCES vehicles(id),
+             date TEXT NOT NULL,
+             category TEXT NOT NULL,
+             amount INTEGER NOT NULL,
+             note TEXT
+         );
+         
+         CREATE TABLE IF NOT EXISTS incomes (
+             id INTEGER PRIMARY KEY,
+             vehicle_id INTEGER NOT NULL REFERENCES vehicles(id),
+             date TEXT NOT NULL,
+             amount INTEGER NOT NULL,
+             note TEXT
+         );"""
+         )
+        conn.commit()
+    finally:
+        conn.close()
+           
+
+def list_vehicles():
+    conn = connect
     query = ("SELECT name, id FROM vehicles;")
     rows = conn.execute(query).fetchall()
     conn.close()
@@ -15,3 +54,75 @@ def print_vehical(rows):
     print(f"{'Vehicle':<12}")
     for name, id in rows:
         print(f"{name:<12}{id:<12}")
+
+def add_income(vehicle_id, date, amount, note):
+    conn = connect()
+    try:
+        cur = conn.execute(
+            "INSERT INTO incomes (vehicle_id, date, amount, note) VALUES (?, ?, ?, ?)",
+            (vehicle_id, date, amount, note),
+        )
+        conn.commit()
+        return cur.lastrowid
+    finally:
+        conn.close()
+
+def add_expense(vehicle_id, date, category, amount, note ):
+    conn = connect()
+    try:
+        cur = conn.execute(
+         "INSERT INTO expenses(vehicle_id, date, category, amount,note) VALUES(? , ? , ? , ? , ?)",
+          (vehicle_id, date, category, amount, note),
+        )
+        conn.commit()
+        return cur.lastrowid
+    finally:
+        conn.close()
+
+def add_vehicle(name,plate,typeV,odometer_km):
+    conn = connect()
+    try:
+        cur = conn.execute(
+            "INSERT INTO vehicles(name,plate,type,odometer_km) VALUES(?,?,?,?)",
+            (name,plate,typeV,odometer_km),
+        )
+        conn.commit()
+        return cur.lastrowid
+    finally:
+        conn.close()
+
+def clear_all_records():
+    conn = connect()
+    try:
+        cur = conn.executescript(
+            """DELETE FROM incomes;
+                DELETE FROM expenses;
+                DELETE FROM vehicles;"""
+        )
+        conn.commit()
+        return cur.rowcount
+    finally:
+        conn.close()
+
+def show_expenses():
+    conn = connect()
+    rows = conn.execute("SELECT id , vehicle_id, date, category, amount FROM expenses;").fetchall()
+    conn.commit()
+    conn.close()
+    print(f"{'هزینه ها':<12}{'شماره ماشین':<12}{'تاریخ':<12}{'نوع هزینه':<12}{'مقدار هزینه':<12}")
+    for id , vehicle_id, date, category, amount in rows:
+        print(f"{id:<12}{vehicle_id:<12}{date:<12}{category:<12}{amount:<12}")
+
+
+def delete_expense(expense_id):
+    conn = connect()
+    try:
+        cur = conn.execute("PRAGMA foreign_keys = ON")
+        cur = conn.execute(
+            "DELETE FROM expenses WHERE id = ?",
+            (expense_id,)
+        )
+        conn.commit()
+        return cur.rowcount
+    finally:
+        conn.close()

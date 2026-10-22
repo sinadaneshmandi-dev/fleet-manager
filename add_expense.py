@@ -1,10 +1,5 @@
 import db
 import sqlite3
-from pathlib import Path
-
-BASE = Path(__file__).parent
-DB_PATH = BASE/"fleet.db"
-
 
 def ask_expense():
     while True:
@@ -28,24 +23,17 @@ def ask_expense():
     note = input("what is it for :")
     return vehicle_id, date, category, amount, note 
 
-def save_expense(expense):
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        conn.execute("PRAGMA foreign_keys = ON")
-        conn.execute("INSERT INTO expenses(vehicle_id, date, category, amount,note) VALUES(? , ? , ? , ? , ?)", expense)
-        conn.commit()
-        print("information saved successfully")
-    except  sqlite3.IntegrityError:
-        print("information didn't save cause to an input error, plz insert true inputs.")
-    finally:
-       conn.close()
             
 def run():
     row = db.list_vehicles()
     db.print_vehical(row)
-    expense = ask_expense()
-    save_expense(expense)
-    print(expense)
+    vehicle_id, date, category, amount, note = ask_expense()
+    try:
+        db.add_expense(vehicle_id, date, category, amount, note)
+        print("اطلاعات با موفقیت اضافه شد")
+    except sqlite3.IntegrityError:
+        print("اطلاعات ذخیره نشد دوباره امتحان کنید")
+
 
 if __name__ == "__main__":
     run()

@@ -1,13 +1,11 @@
 import sqlite3
-from pathlib import Path
+import db
 
-BASE = Path(__file__).parent
-DB_PATH = BASE/"fleet.db"
 
 def ask_vehicle():
     name = input("plz enter your vehicle name : ")
     plate = input("what is your vehicle plate( 00Q000 ) : ")
-    type = input("plz enter the vehicle type << کامیون / اتوبوس >> : ")
+    typeV = input("plz enter the vehicle type << کامیون / اتوبوس >> : ")
 
 
     while True:
@@ -17,23 +15,17 @@ def ask_vehicle():
         except ValueError:
             print("plz enter a number :")
 
-    return name,plate,type,odometer_km
+    return name,plate,typeV,odometer_km
 
-def save_vehicles(vehicle):
-    conn = sqlite3.connect(DB_PATH)
-    try:
-            conn.execute("PRAGMA foreign_keys = ON")
-            conn.execute("INSERT INTO vehicles(name,plate,type,odometer_km) VALUES(?,?,?,?)", vehicle)
-            conn.commit()
-            print("information saved successfully")
-    except sqlite3.IntegrityError:
-        print("information didn't save cause to an input error, plz insert true inputs.")
-    finally:
-           conn.close()
 def run():
-    vehicle = ask_vehicle()
-    save_vehicles(vehicle)
-    print(vehicle)
+    rows = db.list_vehicles()
+    db.print_vehical(rows)
+    name,plate,typeV,odometer_km = ask_vehicle()
+    try:
+        db.add_vehicle(name,plate,typeV,odometer_km)
+        print("اطلاعات با موفقیت ذخیره شد")
+    except sqlite3.IntegrityError:
+        print("اطلاعات ذخیره نشد دوباره تلاش کنید")
 
 if __name__ == "__main__":
     run()
