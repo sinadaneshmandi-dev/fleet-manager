@@ -25,8 +25,7 @@ def ask_expense():
 
             
 def run():
-    row = db.list_vehicles()
-    db.print_vehical(row)
+    db.list_vehicles()
     vehicle_id, date, category, amount, note = ask_expense()
     try:
         db.add_expense(vehicle_id, date, category, amount, note)

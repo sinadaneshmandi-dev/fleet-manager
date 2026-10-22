@@ -44,17 +44,14 @@ def crear_db():
            
 
 def list_vehicles():
-    conn = connect
-    query = ("SELECT name, id FROM vehicles;")
-    rows = conn.execute(query).fetchall()
+    conn = connect()
+    rows = conn.execute("SELECT name, id FROM vehicles;").fetchall()
     conn.close()
-    return rows   
-
-def print_vehical(rows):
-    print(f"{'Vehicle':<12}")
+    print(f"{'شناسه':<12}")
     for name, id in rows:
-        print(f"{name:<12}{id:<12}")
+        print(f"{name:<12}{id:<12}")  
 
+    
 def add_income(vehicle_id, date, amount, note):
     conn = connect()
     try:
@@ -109,7 +106,7 @@ def show_expenses():
     rows = conn.execute("SELECT id , vehicle_id, date, category, amount FROM expenses;").fetchall()
     conn.commit()
     conn.close()
-    print(f"{'هزینه ها':<12}{'شماره ماشین':<12}{'تاریخ':<12}{'نوع هزینه':<12}{'مقدار هزینه':<12}")
+    print(f"{'شناسه':<12}")
     for id , vehicle_id, date, category, amount in rows:
         print(f"{id:<12}{vehicle_id:<12}{date:<12}{category:<12}{amount:<12}")
 
@@ -122,6 +119,36 @@ def delete_expense(expense_id):
             "DELETE FROM expenses WHERE id = ?",
             (expense_id,)
         )
+        conn.commit()
+        return cur.rowcount
+    finally:
+        conn.close()
+
+def show_income():
+    conn = connect()
+    rows = conn.execute("SELECT id,vehicle_id, date,amount FROM incomes; ").fetchall()
+    conn.commit()
+    conn.close()
+    print(f"{'شناسه':<12}")
+    for id , vehicle_id, date, amount in rows:
+        print(f"{id:<12}{vehicle_id:<12}{date:<12}{amount:<12}")
+
+def delete_income(income_id):
+    conn = connect()
+    try:
+        cur = conn.execute("PRAGMA foreign_keys = ON")
+        cur = conn.execute("DELETE FROM incomes WHERE id = ?",
+            (income_id,))
+        conn.commit()
+        return cur.rowcount
+    finally:
+        conn.close()
+
+def delete_vehicle(vehicle_id):
+    conn = connect()
+    try:
+        cur = conn.execute("DELETE FROM vehicles WHERE id = ?",
+        (vehicle_id,)   )
         conn.commit()
         return cur.rowcount
     finally:

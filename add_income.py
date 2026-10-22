@@ -22,8 +22,7 @@ def ask_income():
     return vehicle_id, date,amount, note 
 
 def run():
-    rows = db.list_vehicles()
-    db.print_vehical(rows)
+    db.list_vehicles()
     vehicle_id, date, amount, note = ask_income()
     try:
         db.add_income(vehicle_id, date, amount, note)

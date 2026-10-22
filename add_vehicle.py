@@ -18,8 +18,7 @@ def ask_vehicle():
     return name,plate,typeV,odometer_km
 
 def run():
-    rows = db.list_vehicles()
-    db.print_vehical(rows)
+    db.list_vehicles()
     name,plate,typeV,odometer_km = ask_vehicle()
     try:
         db.add_vehicle(name,plate,typeV,odometer_km)
