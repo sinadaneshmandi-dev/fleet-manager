@@ -1,20 +1,11 @@
 import sqlite3 
 import db
-
-
-def ask_expense():
-    while True:
-        try:
-            expense_id = int(input("لطفا شناسه هزینه ای که میخوای پاک بکنی رو وارد کن : "))
-            break        
-        except:
-            print("لطفا شماره شناسه رو دوباره وارد کن")
-    return expense_id
-
+import utility
 
 def run():
-    db.show_expenses()
-    expense_id = ask_expense()
+    rows = db.list_expenses()
+    utility.print_expense(rows)
+    expense_id = utility.ask_expense()
     try:
         deleted = db.delete_expense(expense_id)
         if deleted == 0:

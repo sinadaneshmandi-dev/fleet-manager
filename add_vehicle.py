@@ -1,25 +1,11 @@
 import sqlite3
+import utility
 import db
 
-
-def ask_vehicle():
-    name = input("plz enter your vehicle name : ")
-    plate = input("what is your vehicle plate( 00Q000 ) : ")
-    typeV = input("plz enter the vehicle type << کامیون / اتوبوس >> : ")
-
-
-    while True:
-        try:
-            odometer_km = int(input("plz enter the amount of your vehicle km_counter : "))
-            break
-        except ValueError:
-            print("plz enter a number :")
-
-    return name,plate,typeV,odometer_km
-
 def run():
-    db.list_vehicles()
-    name,plate,typeV,odometer_km = ask_vehicle()
+    rows = db.list_vehicles()
+    utility.print_vehicle(rows)
+    name,plate,typeV,odometer_km = utility.insert_vehicle()
     try:
         db.add_vehicle(name,plate,typeV,odometer_km)
         print("اطلاعات با موفقیت ذخیره شد")

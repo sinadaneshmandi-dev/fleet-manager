@@ -1,18 +1,11 @@
 import db
 import sqlite3
-
-def ask_vehicle():
-    while True:
-        try:
-            vehicle_id = int(input("لطفا شماره ماشینی که میخواهید حذف کنید را وارد کنید:"))
-            break
-        except:
-            print(" خطا!!! لطفا دوباره امتحان کنید")
-    return vehicle_id
+import utility
 
 def run():
-    db.list_vehicles()
-    vehicle_id = ask_vehicle()
+    rows = db.list_vehicles()
+    utility.print_vehicle(rows)
+    vehicle_id = utility.ask_vehicle()
     try:
         deleted = db.delete_vehicle(vehicle_id)
         if deleted == 0:
