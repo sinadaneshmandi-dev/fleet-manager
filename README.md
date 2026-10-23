@@ -20,7 +20,11 @@ it reports the profit of your fleet and it will add expenses to your data base.
     ├── delete_expense.py
     ├── delete_income.py
     ├── delete_vehicle.py
+    ├── get_expense.py
+    ├── get_income.py
+    ├── get_vehicle.py
     ├── db.py
+    ├── utility.py
     └── sql/
         ├── seed.sql
         └── report.sql
