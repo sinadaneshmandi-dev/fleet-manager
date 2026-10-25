@@ -20,6 +20,7 @@ it reports the profit of your fleet and it will add expenses to your data base.
     ├── delete_expense.py
     ├── delete_income.py
     ├── delete_vehicle.py
+    ├── edite_expense.py
     ├── get_expense.py
     ├── get_income.py
     ├── get_vehicle.py
