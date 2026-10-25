@@ -155,7 +155,7 @@ def select_expense(expense_id):
 
 def select_income(income_id):
     conn = connect()
-    income = conn.execute("SELECT id,vehicle_id, date,amount FROM incomes WHERE (? IS NULL OR id = ?)" , (income_id,)).fetchall()
+    income = conn.execute("SELECT id,vehicle_id, date,amount FROM incomes WHERE id = ?" , (income_id,)).fetchall()
     conn.close()
     return income
 
@@ -164,3 +164,23 @@ def select_vehicle(vehicle_id):
     vehicle = conn.execute("SELECT name, id FROM vehicles WHERE id = ? " , (vehicle_id,)).fetchall()
     conn.close()
     return vehicle
+
+def update_expense(expense_id,vehicle_id, date, category, amount , note):
+    conn = connect()
+    try:
+        cur = conn.execute("UPDATE expenses SET vehicle_id = ?, date=?, category=?, amount=?, note = ? WHERE id = ?",
+            (vehicle_id, date, category, amount , note, expense_id))
+        conn.commit()
+        return cur.rowcount
+    finally:
+        conn.close()
+
+def get_expense(expense_id):
+    conn = connect()
+    try:
+        return conn.execute(
+            "SELECT id, vehicle_id, date, category, amount, note FROM expenses WHERE id = ?",
+            (expense_id,),
+        ).fetchone()
+    finally:
+        conn.close()

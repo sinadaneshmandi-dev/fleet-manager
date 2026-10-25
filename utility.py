@@ -98,3 +98,25 @@ def print_vehicle(rows):
     for name, id in rows:
         print(f"{name:<12}{id:<12}") 
 
+def ask_id(prompt):
+    while True:
+        try:
+            return int(input(prompt))
+        except ValueError:
+            print("لطفاً یک عدد وارد کنید.")
+
+
+def ask_text_or_keep(prompt, old_value):
+    text = input(f"{prompt} [{old_value or ''}]: ").strip()
+    return text or old_value
+
+
+def ask_int_or_keep(prompt, old_value):
+    while True:
+        text = input(f"{prompt} [{old_value}]: ").strip()
+        if text == "":
+            return old_value
+        try:
+            return int(text)
+        except ValueError:
+            print("لطفاً یک عدد وارد کنید.")
