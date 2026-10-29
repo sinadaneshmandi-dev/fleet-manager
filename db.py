@@ -184,3 +184,50 @@ def get_expense(expense_id):
         ).fetchone()
     finally:
         conn.close()
+
+def get_income(income_id):
+    conn = connect()
+    try:
+        return conn.execute(
+            "SELECT id, vehicle_id, date, amount, note FROM incomes WHERE id = ?",
+            (income_id,),
+        ).fetchone()
+    finally:
+        conn.close()
+
+
+def update_income(income_id, vehicle_id, date, amount, note):
+    conn = connect()
+    try:
+        cur = conn.execute(
+            "UPDATE incomes SET vehicle_id = ?, date = ?, amount = ?, note = ? WHERE id = ?",
+            (vehicle_id, date, amount, note, income_id),
+        )
+        conn.commit()
+        return cur.rowcount
+    finally:
+        conn.close()
+
+
+def get_vehicle(vehicle_id):
+    conn = connect()
+    try:
+        return conn.execute(
+            "SELECT id, name, plate, type, odometer_km FROM vehicles WHERE id = ?",
+            (vehicle_id,),
+        ).fetchone()
+    finally:
+        conn.close()
+
+
+def update_vehicle(vehicle_id, name, plate, typeV, odometer_km):
+    conn = connect()
+    try:
+        cur = conn.execute(
+            "UPDATE vehicles SET name = ?, plate = ?, type = ?, odometer_km = ? WHERE id = ?",
+            (name, plate, typeV, odometer_km, vehicle_id),
+        )
+        conn.commit()
+        return cur.rowcount
+    finally:
+        conn.close()

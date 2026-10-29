@@ -1,3 +1,5 @@
+from datetime import datetime
+
 def ask_expense():
     while True:
         try:
@@ -120,3 +122,13 @@ def ask_int_or_keep(prompt, old_value):
             return int(text)
         except ValueError:
             print("لطفاً یک عدد وارد کنید.")
+
+def ask_date_or_keep(prompt, old_value):
+    while True:
+        text = input(f"{prompt} [{old_value}]: ").strip()
+        if text == "":
+            return old_value
+        try:
+            return datetime.strptime(text, "%Y-%m-%d").strftime("%Y-%m-%d")
+        except ValueError:
+            print("تاریخ باید به شکل YYYY-MM-DD باشد (مثلاً 2026-10-29).")

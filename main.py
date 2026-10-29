@@ -5,6 +5,7 @@ import add_vehicle
 import clear_all_records
 import seed_db
 import create_db
+import edite_expense
 
 
 def show_menu():
@@ -17,7 +18,8 @@ def show_menu():
     print("5. Clear records")
     print("6. Add test records")
     print("7. Show profit report")
-    print("8. Exit")
+    print("8. edite expense record")
+    print("9. exit")
 
 
 def main():
@@ -40,7 +42,9 @@ def main():
         elif choice == "7":
             report_profit.run()
         elif choice == "8":
-            print("Goodbye.")
+            edite_expense.run()
+        elif choice == "9":
+            print("اتمام فعالیت")
             break
         else:
             print("Invalid choice, try again.")
