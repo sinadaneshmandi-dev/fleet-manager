@@ -11,3 +11,12 @@ venv/
 
 # Editor
 .vscode/
+
+# PyInstaller build output
+/build/
+/dist/
+
+# Python virtual environment and cache
+.venv/
+__pycache__/
+*.py[cod]
