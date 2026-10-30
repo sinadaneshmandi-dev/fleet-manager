@@ -19,7 +19,7 @@ fleet-manager/
 ├── db.py
 ├── report_profit.py
 ├── fleet.db
-├── python - learning/
+└── python - learning/
     ├── create_db.py
     ├── seed_db.py
     ├── add_expense.py
