@@ -45,7 +45,7 @@ def crear_db():
 
 def list_vehicles():
     conn = connect()
-    rows = conn.execute("SELECT name, id FROM vehicles;").fetchall()
+    rows = conn.execute("SELECT id,name,plate,type,odometer_km FROM vehicles;").fetchall()
     conn.close()
     return rows
 
@@ -147,23 +147,7 @@ def delete_vehicle(vehicle_id):
     finally:
         conn.close()
 
-def select_expense(expense_id):
-    conn = connect()
-    expense = conn.execute("SELECT id , vehicle_id, date, category, amount FROM expenses WHERE id = ? " , (expense_id,)).fetchall()
-    conn.close()
-    return expense
 
-def select_income(income_id):
-    conn = connect()
-    income = conn.execute("SELECT id,vehicle_id, date,amount FROM incomes WHERE id = ?" , (income_id,)).fetchall()
-    conn.close()
-    return income
-
-def select_vehicle(vehicle_id):
-    conn = connect()
-    vehicle = conn.execute("SELECT name, id FROM vehicles WHERE id = ? " , (vehicle_id,)).fetchall()
-    conn.close()
-    return vehicle
 
 def update_expense(expense_id,vehicle_id, date, category, amount , note):
     conn = connect()
@@ -175,7 +159,7 @@ def update_expense(expense_id,vehicle_id, date, category, amount , note):
     finally:
         conn.close()
 
-def get_expense(expense_id):
+def select_expense(expense_id):
     conn = connect()
     try:
         return conn.execute(
@@ -185,7 +169,7 @@ def get_expense(expense_id):
     finally:
         conn.close()
 
-def get_income(income_id):
+def select_income(income_id):
     conn = connect()
     try:
         return conn.execute(
@@ -209,7 +193,7 @@ def update_income(income_id, vehicle_id, date, amount, note):
         conn.close()
 
 
-def get_vehicle(vehicle_id):
+def select_vehicle(vehicle_id):
     conn = connect()
     try:
         return conn.execute(

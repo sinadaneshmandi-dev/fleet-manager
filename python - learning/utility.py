@@ -97,8 +97,8 @@ def print_income(rows):
 
 def print_vehicle(rows):
     print(f"{'شناسه':<12}")
-    for name, id in rows:
-        print(f"{name:<12}{id:<12}") 
+    for id,name,plate,typeV,odometer_km in rows:
+        print(f"{id:<12}{name:<12}{plate:<12}{typeV:<12}{odometer_km:<12}") 
 
 def ask_id(prompt):
     while True:

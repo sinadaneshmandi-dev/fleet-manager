@@ -4,7 +4,7 @@ import sqlite3
 
 def run():
     rows = db.list_vehicles()
-    utility.insert_vehicle(rows)
+    utility.print_vehicle(rows)
     vehicle_id, date, amount, note = utility.insert_income()
     try:
         db.add_income(vehicle_id, date, amount, note)

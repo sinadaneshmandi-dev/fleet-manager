@@ -7,7 +7,7 @@ def run():
     utility.print_expense(db.list_expenses())
     expense_id = utility.ask_id("شناسه‌ی هزینه‌ای که می‌خواهید ویرایش کنید: ")
 
-    row = db.get_expense(expense_id)
+    row = db.select_expense(expense_id)
     if row is None:
         print("هزینه‌ای با این شناسه وجود ندارد.")
         return

@@ -6,7 +6,7 @@ def run():
     utility.print_vehicle(db.list_vehicles())
     vehicle_id = utility.ask_id("شماره‌ی ماشینی که می‌خواهید ویرایش کنید: ")
 
-    row = db.get_vehicle(vehicle_id)
+    row = db.select_vehicle(vehicle_id)
     if row is None:
         print("ماشینی با این شماره وجود ندارد.")
         return

@@ -7,7 +7,7 @@ def run():
     utility.print_income(db.list_incomes())
     income_id = utility.ask_id("شناسه‌ی درآمدی که می‌خواهید ویرایش کنید: ")
 
-    row = db.get_income(income_id)
+    row = db.select_income(income_id)
     if row is None:
         print("درآمدی با این شناسه وجود ندارد.")
         return
