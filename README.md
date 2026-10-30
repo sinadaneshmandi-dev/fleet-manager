@@ -1,19 +1,27 @@
-# fleet-manager
-Fleet management system for tracking vehicle expenses, income, and maintenance. Built with Python and SQLite.
-# Features: 
-it reports the profit of your fleet and it will add expenses to your data base.
-# How to run:
-1. Install Python 3.
-2. In the project folder, run: `python main.py`
-3. The first time, choose "Create database" from the menu.
-# Project Directory
-    fleet-manager/
-    ├── README.md
-    ├── .gitignore
-    ├── main.py
+# Fleet Manager
+
+A desktop fleet-management app built with Python, Tkinter, and SQLite. Track vehicles, expenses, and income, and view profit by vehicle.
+
+## Features
+
+- Add, edit, view, and delete vehicles
+- Record vehicle expenses and income
+- View a profit report for each vehicle
+- Store data in a local SQLite database
+
+## Run from source
+- run python gui.py
+
+## Project files
+
+fleet-manager/
+├── gui.py
+├── db.py
+├── report_profit.py
+├── fleet.db
+├── python - learning/
     ├── create_db.py
     ├── seed_db.py
-    ├── report.py
     ├── add_expense.py
     ├── add_income.py
     ├── add_vehicle.py
@@ -22,10 +30,20 @@ it reports the profit of your fleet and it will add expenses to your data base.
     ├── delete_vehicle.py
     ├── edite_expense.py
     ├── get_expense.py
-    ├── get_income.py
-    ├── get_vehicle.py
-    ├── db.py
-    ├── utility.py
-    └── sql/
-        ├── seed.sql
-        └── report.sql
+    ├── edite_income.py
+    ├── edite_vehicle.py
+    └── utility.py
+└── sql/
+    ├── report.sql
+    └── seed.sql
+
+## Requirements
+
+- Windows 10 or later
+- Python with Tkinter installed
+
+To check Tkinter, run:
+
+```powershell
+python -m tkinter
+

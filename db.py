@@ -1,8 +1,18 @@
+import os
+import sys
 import sqlite3
 from pathlib import Path
 
-BASE = Path(__file__).parent
-DB_PATH = BASE/"fleet.db"
+BASE = Path(__file__).resolve().parent
+
+if getattr(sys, "frozen", False):
+    
+    APP_DATA = Path(os.environ.get("APPDATA", Path.home())) / "FleetManager"
+    APP_DATA.mkdir(parents=True, exist_ok=True)
+    DB_PATH = APP_DATA / "fleet.db"
+else:
+    
+    DB_PATH = BASE / "fleet.db"
 
 def connect():
     conn = sqlite3.connect(DB_PATH)
